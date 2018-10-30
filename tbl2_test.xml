@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<REMITTable2 xmlns="http://www.acer.europa.eu/REMIT/REMITTable2_V1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <reportingEntityID>
+        <ace>A0001234C.IT</ace>
+    </reportingEntityID>
+    <TradeList>
+        <nonStandardContractReport>
+            <RecordSeqNumber>1</RecordSeqNumber>
+            <idOfMarketParticipant>
+                <ace>A0001111C.IT</ace>
+            </idOfMarketParticipant>
+            <otherMarketParticipant>
+                <ace>A0009999F.IT</ace>
+            </otherMarketParticipant>
+            <tradingCapacity>P</tradingCapacity>
+            <buySellIndicator>S</buySellIndicator>
+            <contractId>ncbtQBaEjxXfqtpYSqy6A1NcJGIQB48F88jR1LRYlm001</contractId>
+            <contractDate>2018-10-01</contractDate>
+            <contractType>FW</contractType>
+            <energyCommodity>NG</energyCommodity>
+            <priceOrPriceFormula>
+                <priceFormula>PSV+K</priceFormula>
+            </priceOrPriceFormula>
+            <totalNotionalContractQuantity>
+                <value>244000</value>
+                <unit>MWh</unit>
+            </totalNotionalContractQuantity>
+            <typeOfIndexPrice>I</typeOfIndexPrice>
+            <fixingIndexDetails>
+                <fixingIndex>NATURAL GAS- PSV- DAY AHEAD AND WEEKEND UNWEIGHTED AVERAGE PRICE - HEREN</fixingIndex>
+                <fixingIndexType>OT</fixingIndexType>
+                <fixingIndexSource>ICIS-Heren</fixingIndexSource>
+                <fixingFrequency>D</fixingFrequency>
+            </fixingIndexDetails>
+            <settlementMethod>P</settlementMethod>
+            <deliveryPointOrZone>21Y---A001A010-A</deliveryPointOrZone>
+            <deliveryStartDate>2018-11-01</deliveryStartDate>
+            <deliveryEndDate>2018-11-30</deliveryEndDate>
+            <loadType>GD</loadType>
+            <actionType>N</actionType>
+        </nonStandardContractReport>
+    </TradeList>
+</REMITTable2>

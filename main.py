@@ -5,6 +5,7 @@ from remitparser import RemitTable2Parser
 
 
 def main():
+    # TODO: handle files/folders
     xml = ['tbl2_test.xml']
     rows = list()
     for _x in xml:

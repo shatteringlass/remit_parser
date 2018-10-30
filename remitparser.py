@@ -50,14 +50,13 @@ TRADELIST = '/tbl:REMITTable2/tbl:TradeList/*'
 
 class RemitParser(object):
 
-    tbl = ''
-
     def __init__(self, xml):
         from lxml import etree
+        import re
         #from io import StringIO
         self._parser = etree.XMLParser(ns_clean=True)
         self._tree = etree.parse(xml, parser=self._parser)
-        self._xmlns = {'tbl' : xmlns[self.tbl]}
+        self._xmlns = {'tbl' : re.findall('\{(.*)\}',self.tree.getroot().tag)[0]}
 
     def _get_doc_header(self):
         return {k: (self.get_at(self.tree.xpath(v, namespaces=self._xmlns), 0, '') if v else '') for (k, v) in STATIC_FIELDS.items()}
@@ -83,10 +82,8 @@ class RemitParser(object):
 
 
 class RemitTable1Parser(RemitParser):
-    tbl = 'tbl1'
     pass
 
 
 class RemitTable2Parser(RemitParser):
-    tbl = 'tbl2'
     pass

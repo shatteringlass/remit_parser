@@ -1,16 +1,17 @@
 import csv
-
-from remitparser import RemitTable1Parser
-from remitparser import RemitTable2Parser
+from remitparser import RemitParser
 
 
 def main():
     # TODO: handle files/folders
     xml = ['tbl2_test.xml']
+    outfile = './tbl2_test.csv'
     rows = list()
     for _x in xml:
-        rows.extend(RemitTable2Parser(_x).get_document())
-    to_csv(rows, './tbl2_test.csv')
+        p = RemitParser(_x)
+        doc = p.get_document()
+        rows.extend(doc)
+    to_csv(rows, outfile)
 
 
 def to_csv(rows, filename):

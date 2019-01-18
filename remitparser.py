@@ -5,49 +5,50 @@ from collections import ChainMap
 
 class RemitParser(object):
 
-    STATIC_FIELDS = {
-        'REPORT_DATE': None,
-        'REPORT_RUN_DATE': None,
-        'SENDER_NAME': '/ns:REMITTable2/ns:reportingEntityID/ns:ace/text()',
-        'SENT_TO_ACER_UK_TIME': None,
-        'DOCUMENT_TYPE': None,
-        'FILENAME': None,
-        'RECORD': None
-    }
-
-    CONTRACT_FIELDS = {
-        'UTI': 'ns:contractId/text()',
-        'LINKED_ORDER': None,
-        'LINKED_TRANSACTION_ID': None,
-        'TRADE_DATE': 'ns:contractDate/text()',
-        'TRANSACTION_TIMESTAMP_UTC': None,
-        'ACTION': 'ns:actionType/text()',
-        'ERR_STATUS': None,
-        'OMP_NAME': None,
-        'MP_NAME': None,
-        'MP_ACER_CODE': 'ns:idOfMarketParticipant/ns:ace/text()',
-        'OTHER_MP_CODE': 'ns:otherMarketParticipant/ns:ace/text()',
-        'CONTRACT_TYPE': 'ns:contractType/text()',
-        'CONTRACT_NAME': None,
-        'COMMODITY': 'ns:energyCommodity/text()',
-        'BS': 'ns:buySellIndicator/text()',
-        'DELIVERY_POINT': 'ns:deliveryPointOrZone/text()',
-        'DEL_START': 'ns:deliveryStartDate/text()',
-        'DEL_END': 'ns:deliveryEndDate/text()',
-        'QUANTITY': 'ns:totalNotionalContractQuantity/ns:value/text()',
-        'UNIT': 'ns:totalNotionalContractQuantity/ns:unit/text()',
-        'PRICE': 'ns:priceOrPriceFormula/ns:price/ns:value/text()',
-        'CURR': 'ns:priceOrPriceFormula/ns:price/ns:currency/text()',
-        'TOTAL_QUANTITY': 'ns:totalNotionalContractQuantity/ns:value/text()',
-        'TOTAL_UNIT': 'ns:totalNotionalContractQuantity/ns:unit/text()',
-        'NOTIONAL_AMOUNT': 'ns:estimatedNotionalAmount/ns:value/text()',
-        'NOT_CURR': 'ns:estimatedNotionalAmount/ns:currency/text()'
-    }
-
-    TRADELIST = '/*/ns:TradeList/*'
-
     def __init__(self, xml):
-        #from io import StringIO
+        # from io import StringIO
+
+        self.STATIC_FIELDS = {
+            'REPORT_DATE': None,
+            'REPORT_RUN_DATE': None,
+            'SENDER_NAME': '/ns:REMITTable2/ns:reportingEntityID/ns:ace/text()',
+            'SENT_TO_ACER_UK_TIME': None,
+            'DOCUMENT_TYPE': None,
+            'FILENAME': None,
+            'RECORD': None
+        }
+
+        self.CONTRACT_FIELDS = {
+            'UTI': 'ns:contractId/text()',
+            'LINKED_ORDER': None,
+            'LINKED_TRANSACTION_ID': None,
+            'TRADE_DATE': 'ns:contractDate/text()',
+            'TRANSACTION_TIMESTAMP_UTC': None,
+            'ACTION': 'ns:actionType/text()',
+            'ERR_STATUS': None,
+            'OMP_NAME': None,
+            'MP_NAME': None,
+            'MP_ACER_CODE': 'ns:idOfMarketParticipant/ns:ace/text()',
+            'OTHER_MP_CODE': 'ns:otherMarketParticipant/ns:ace/text()',
+            'CONTRACT_TYPE': 'ns:contractType/text()',
+            'CONTRACT_NAME': None,
+            'COMMODITY': 'ns:energyCommodity/text()',
+            'BS': 'ns:buySellIndicator/text()',
+            'DELIVERY_POINT': 'ns:deliveryPointOrZone/text()',
+            'DEL_START': 'ns:deliveryStartDate/text()',
+            'DEL_END': 'ns:deliveryEndDate/text()',
+            'QUANTITY': 'ns:totalNotionalContractQuantity/ns:value/text()',
+            'UNIT': 'ns:totalNotionalContractQuantity/ns:unit/text()',
+            'PRICE': 'ns:priceOrPriceFormula/ns:price/ns:value/text()',
+            'CURR': 'ns:priceOrPriceFormula/ns:price/ns:currency/text()',
+            'TOTAL_QUANTITY': 'ns:totalNotionalContractQuantity/ns:value/text()',
+            'TOTAL_UNIT': 'ns:totalNotionalContractQuantity/ns:unit/text()',
+            'NOTIONAL_AMOUNT': 'ns:estimatedNotionalAmount/ns:value/text()',
+            'NOT_CURR': 'ns:estimatedNotionalAmount/ns:currency/text()'
+        }
+
+        self.TRADELIST = '/*/ns:TradeList/*'
+
         self._parser = etree.XMLParser(ns_clean=True)
         self._tree = etree.parse(xml, parser=self._parser)
         self._xmlns = {'ns': re.findall(
@@ -75,6 +76,17 @@ class RemitParser(object):
 
 
 class RemitTable1Parser(RemitParser):
+
+    def __init__(self, xml):
+        super().__init__(xml)
+        self.CONTRACT_FIELDS.update(
+            {'LINKED_ORDER': 'ns:linkedOrderId/text()',
+             'LINKED_TRANSACTION_ID': 'ns:linkedTransactionId/text()',
+             'OMP_NAME': 'ns:organisedMarketPlaceIdentifier/text()',
+             'TRANSACTION_TIMESTAMP_UTC': 'ns:transactionTime/text()',
+             'CONTRACT_NAME': 'ns:contractName/text()'
+             })
+
     pass
 
 
